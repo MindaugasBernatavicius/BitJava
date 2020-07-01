@@ -30,6 +30,7 @@ public class Main {
         int zmogeliukuKiekis = (int)(Math.random() * 500 + 1);
         // iniciliazuojame masyva į random dydį
         Person[] salosGyventojai = new Person[zmogeliukuKiekis];
+        // ArrayList<Person> salosGyventojai = new ArrayList<>();
 
         // sukame ciklą ir sukuriame jame zmogeliukus
         final int MAX_HUMAN_AGE = 120;
