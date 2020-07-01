@@ -13,7 +13,6 @@ public class Main {
         // jei žmogeliuko amžius virš 50 tai tikimybė jam numirti 10% ir kiekvienais metais didėja 2%;
 
 
-
         return false;
     }
 
