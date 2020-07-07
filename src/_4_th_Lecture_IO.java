@@ -1,4 +1,6 @@
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class _4_th_Lecture_IO {
@@ -23,7 +25,7 @@ public class _4_th_Lecture_IO {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             // skaitome eilutė po eilutės su .readLine() metodu
-            String fileLine = bufferedReader.readLine();
+            String fileLine = bufferedReader.readLine(); // "\n", "\r\n" - ieško newline
             while (fileLine != null) { // žiūrome ar perskaityta eilutė nėra tuščia
                 // System.out.println(fileLine); // spausdiname visą eilutę
 
@@ -47,8 +49,54 @@ public class _4_th_Lecture_IO {
 
 
         //2. Writing to files
+        File relativeFile2 = new File("b.csv");
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter(relativeFile2);
+            BufferedWriter bw = new BufferedWriter(fw);
+            String fileLine = "Mindaugas";
+            bw.write(fileLine);
 
-        //3. Reading from network
+            // writting file with newline
+            String fileLine2 = "Mindaugas\n";
+            bw.write(fileLine2);
+            bw.write("Jonas");
+            bw.newLine();
+            bw.write("Antanas");
+
+            // bw.flush();
+            bw.close(); // close automatically flushes the buffer
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //3. Appending to files
+        try {
+            BufferedWriter bufferedWriter
+                    = new BufferedWriter(new FileWriter(new File("b.csv"), true));
+            String fileLine = "\nappended file line";
+            bufferedWriter.write(fileLine);
+            bufferedWriter.close();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        //4. Reading from network (web)
+        try {
+            URL url = new URL("https", "www.delfi.lt", "/");
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+            String inputLine = in.readLine();
+
+            while (inputLine != null) {
+                System.out.println(inputLine);
+                inputLine = in.readLine();
+            }
+        } catch(MalformedURLException e){
+            e.getStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
 
